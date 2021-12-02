@@ -1,15 +1,69 @@
+#spring:
+#  application:
+#    name: ad-eureka-server
+#
+#server:
+#  port: 8000
+#
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    fetch-registry: false
+#    register-with-eureka: false
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+# eureka-server 集群配置的原理就是不同的 eureka-server 互相注册
+---
+# server 1
 spring:
   application:
     name: ad-eureka-server
-
+  profiles: server1
 server:
   port: 8000
-
 eureka:
   instance:
-    hostname: localhost
+    hostname: server1
+    prefer-ip-address: false
   client:
-    fetch-registry: false
-    register-with-eureka: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://server2:8001/eureka/,http://server3:8002/eureka/
+---
+# server 2
+spring:
+  application:
+    name: ad-eureka-server
+  profiles: server2
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: server2
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server1:8000/eureka/,http://server3:8002/eureka/
+---
+# server 3
+spring:
+  application:
+    name: ad-eureka-server
+  profiles: server3
+server:
+  port: 8002
+eureka:
+  instance:
+    hostname: server3
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server1:8000/eureka/,http://server2:8001/eureka/
+
+# 启动命令
+# 首先需要到父工程目录下执行命令：mvn clean package -Dmaven.test.skip=true
+# 然后到 ad-eureka-server 子工程的 target 目录下 执行如下命令
+# java -jar ad-eureka-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=server1
+# java -jar ad-eureka-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=server2
+# java -jar ad-eureka-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=server3
