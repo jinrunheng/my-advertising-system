@@ -1,8 +1,12 @@
 ## Spring Cloud 微服务架构设计实现广告系统
 
-开启 Eureka Server 集群：
+### 笔记
+- [第二章 广告系统概览与准备工作](https://www.yuque.com/dobbykim/dtgo95/ay3atv)
+- [第三章 Eureka 与 Zuul 介绍](https://www.yuque.com/dobbykim/dtgo95/if11z5)
 
-首先要在 /etc/hosts 文件中指定：
+如何开启 Eureka Server 集群：
+
+在 /etc/hosts 文件中指定：
 ```text
 127.0.0.1 server1
 127.0.0.1 server2

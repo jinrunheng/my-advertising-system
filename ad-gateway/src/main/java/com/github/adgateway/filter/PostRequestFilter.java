@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 计算一次请求的响应时间
+ * 计算一次请求的响应时间；其作用为记录延迟
  */
 @Component
 @Slf4j
