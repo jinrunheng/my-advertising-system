@@ -10,6 +10,7 @@
     </parent>
     <modules>
         <module>ad-eureka-server</module>
+        <module>ad-gateway</module>
     </modules>
 
     <groupId>com.github</groupId>
