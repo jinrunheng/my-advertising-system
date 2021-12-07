@@ -3,6 +3,7 @@
 ### 笔记
 - [第二章 广告系统概览与准备工作](https://www.yuque.com/dobbykim/dtgo95/ay3atv)
 - [第三章 Eureka 与 Zuul 介绍](https://www.yuque.com/dobbykim/dtgo95/if11z5)
+- [第四章 微服务通用模块开发](https://www.yuque.com/dobbykim/dtgo95/gdg3kn)
 
 如何开启 Eureka Server 集群：
 
