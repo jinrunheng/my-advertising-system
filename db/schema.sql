@@ -1,8 +1,8 @@
--- imooc-ad 数据库
-drop DATABASE ad_data;
-CREATE DATABASE ad_data character set utf8;
+-- ad 数据库
+drop DATABASE ad;
+CREATE DATABASE ad character set utf8;
 
-use ad_data;
+use ad;
 
 -- 用户表
 CREATE TABLE `ad_user`
