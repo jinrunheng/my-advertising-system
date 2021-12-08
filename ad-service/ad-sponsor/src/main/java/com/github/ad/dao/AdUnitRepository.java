@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * 完成对 AdUser 的增删改查
+ * 完成对 AdUnit 的增删改查
  */
 public interface AdUnitRepository extends JpaRepository<AdUnit, Long> {
     AdUnit findByPlanIdAndUnitName(Long planId, String unitName);
