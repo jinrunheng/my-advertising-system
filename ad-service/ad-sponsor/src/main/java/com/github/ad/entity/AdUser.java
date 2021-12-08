@@ -9,6 +9,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 用户账户
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
