@@ -10,6 +10,7 @@ import com.github.ad.service.AdUserService;
 import com.github.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AdUserServiceImpl implements AdUserService {
 
+    @Autowired
     private AdUserRepository userRepository;
 
     @Override
