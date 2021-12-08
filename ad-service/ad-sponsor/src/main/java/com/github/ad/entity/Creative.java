@@ -93,5 +93,4 @@ public class Creative {
     @Column(name = "update_time", nullable = false)
     private Date updateTime;
 
-
 }
