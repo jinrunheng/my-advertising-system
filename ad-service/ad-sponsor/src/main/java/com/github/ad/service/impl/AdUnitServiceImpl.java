@@ -3,23 +3,20 @@ package com.github.ad.service.impl;
 import com.github.ad.constant.ErrorMsg;
 import com.github.ad.dao.AdPlanRepository;
 import com.github.ad.dao.AdUnitRepository;
+import com.github.ad.dao.CreativeRepository;
 import com.github.ad.dao.unit_condition.AdUnitDistrictRepository;
 import com.github.ad.dao.unit_condition.AdUnitItRepository;
 import com.github.ad.dao.unit_condition.AdUnitKeywordRepository;
+import com.github.ad.dao.unit_condition.CreativeUnitRepository;
 import com.github.ad.entity.AdPlan;
 import com.github.ad.entity.AdUnit;
 import com.github.ad.entity.unit_condition.AdUnitDistrict;
 import com.github.ad.entity.unit_condition.AdUnitIt;
 import com.github.ad.entity.unit_condition.AdUnitKeyword;
+import com.github.ad.entity.unit_condition.CreativeUnit;
 import com.github.ad.exception.AdException;
-import com.github.ad.request.AdUnitDistrictRequest;
-import com.github.ad.request.AdUnitItRequest;
-import com.github.ad.request.AdUnitKeywordRequest;
-import com.github.ad.request.AdUnitRequest;
-import com.github.ad.response.AdUnitDistrictResponse;
-import com.github.ad.response.AdUnitItResponse;
-import com.github.ad.response.AdUnitKeywordResponse;
-import com.github.ad.response.AdUnitResponse;
+import com.github.ad.request.*;
+import com.github.ad.response.*;
 import com.github.ad.service.AdUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +45,12 @@ public class AdUnitServiceImpl implements AdUnitService {
 
     @Autowired
     private AdUnitDistrictRepository unitDistrictRepository;
+
+    @Autowired
+    private CreativeRepository creativeRepository;
+
+    @Autowired
+    private CreativeUnitRepository creativeUnitRepository;
 
     @Override
     public AdUnitResponse createUnit(AdUnitRequest request) throws AdException {
@@ -146,10 +149,46 @@ public class AdUnitServiceImpl implements AdUnitService {
                 .build();
     }
 
+    @Override
+    public CreativeUnitResponse createCreativeUnit(CreativeUnitRequest request) throws AdException {
+        List<Long> unitIds = request.getUnitItems()
+                .stream()
+                .map(CreativeUnitRequest.CreativeUnitItem::getUnitId)
+                .collect(Collectors.toList());
+        List<Long> creativeIds = request.getUnitItems()
+                .stream()
+                .map(CreativeUnitRequest.CreativeUnitItem::getCreativeId)
+                .collect(Collectors.toList());
+        if (!isRelatedUnitExist(unitIds) || !isRelatedCreativeExist(creativeIds)) {
+            throw new AdException(ErrorMsg.REQUEST_PARAM_ERROR);
+        }
+
+        List<CreativeUnit> creativeUnits = new ArrayList<>();
+        request.getUnitItems().forEach(unitItem -> {
+            creativeUnits.add(new CreativeUnit(unitItem.getCreativeId(), unitItem.getUnitId()));
+        });
+
+        List<Long> ids = creativeUnitRepository.saveAll(creativeUnits)
+                .stream()
+                .map(CreativeUnit::getId)
+                .collect(Collectors.toList());
+
+        return CreativeUnitResponse.builder()
+                .ids(ids)
+                .build();
+    }
+
     private boolean isRelatedUnitExist(List<Long> unitIds) {
         if (CollectionUtils.isEmpty(unitIds)) {
             return false;
         }
         return unitRepository.findAllById(unitIds).size() == new HashSet<>(unitIds).size();
+    }
+
+    private boolean isRelatedCreativeExist(List<Long> creativeIds) {
+        if (CollectionUtils.isEmpty(creativeIds)) {
+            return false;
+        }
+        return creativeRepository.findAllById(creativeIds).size() == new HashSet<>(creativeIds).size();
     }
 }
