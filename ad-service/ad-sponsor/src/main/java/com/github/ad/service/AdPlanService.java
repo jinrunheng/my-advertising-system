@@ -30,11 +30,11 @@ public interface AdPlanService {
     /**
      * 更新推广计划
      *
-     * @param response
+     * @param request
      * @return
      * @throws AdException
      */
-    AdPlanResponse updateAdPlan(AdPlanResponse response) throws AdException;
+    AdPlanResponse updateAdPlan(AdPlanRequest request) throws AdException;
 
     /**
      * 删除推广计划
