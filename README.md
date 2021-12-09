@@ -5,6 +5,14 @@
 - [第三章 Eureka 与 Zuul 介绍](https://www.yuque.com/dobbykim/dtgo95/if11z5)
 - [第四章 微服务通用模块开发](https://www.yuque.com/dobbykim/dtgo95/gdg3kn)
 
+使用 Docker 开启 MySQL 数据库:
+```bash
+docker run --name ad -e MYSQL_ROOT_PASSWORD=123 -e MYSQL_DATABASE=ad -p 3306:3306 -d mysql
+```
+使用 Flyway 初始化数据表：
+```bash
+mvn flyway:clean flyway:migrate
+```
 如何开启 Eureka Server 集群：
 
 在 /etc/hosts 文件中指定：
