@@ -26,7 +26,7 @@ public class AdPlanController {
         return adPlanService.createAdPlan(request);
     }
 
-    @PostMapping("/get/adPlan")
+    @PostMapping(value = "/get/adPlan")
     public List<AdPlan> getAdPlanByIds(@RequestBody AdPlanGetRequest request) throws AdException {
         log.info("ad-sponsor: getAdPlanByIds -> {}", JSON.toJSONString(request));
         return adPlanService.getAdPlanByIds(request);
