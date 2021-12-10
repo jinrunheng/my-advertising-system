@@ -7,13 +7,23 @@
 
 使用 Docker 开启 MySQL 数据库:
 ```bash
-docker run --name ad -e MYSQL_ROOT_PASSWORD=123 -e MYSQL_DATABASE=ad -p 3306:3306 -d mysql
+docker run --name ad -e MYSQL_ROOT_PASSWORD=123 -e MYSQL_DATABASE=ad -p 3306:3306 -v /Users/macbook/Desktop/myProject/my-advertising-system/db:/data -d mysql
 ```
-使用 Flyway 初始化数据表：
+进入到容器中：
 ```bash
-mvn flyway:clean flyway:migrate
+docker exec -it 638d33471ae0d3374045ba08bac8f51704a16a9535ce6d97cc3b8ee1d78dd916 /bin/bash
 ```
-如何开启 Eureka Server 集群：
+进入到 MySQL 环境中：
+```bash
+mysql -uroot -p123
+```
+执行命令，完成数据表的初始化：
+```bash
+source /data/schema.sql
+```
+
+
+#### 如何开启 Eureka Server 集群：
 
 在 /etc/hosts 文件中指定：
 ```text
