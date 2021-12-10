@@ -4,6 +4,8 @@
 - [第二章 广告系统概览与准备工作](https://www.yuque.com/dobbykim/dtgo95/ay3atv)
 - [第三章 Eureka 与 Zuul 介绍](https://www.yuque.com/dobbykim/dtgo95/if11z5)
 - [第四章 微服务通用模块开发](https://www.yuque.com/dobbykim/dtgo95/gdg3kn)
+- [第五章 广告投放系统的开发](https://www.yuque.com/dobbykim/dtgo95/gqs0yo)
+- [第六章 广告检索系统-微服务调用]()
 
 使用 Docker 开启 MySQL 数据库:
 ```bash
