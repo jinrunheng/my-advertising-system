@@ -1,6 +1,7 @@
 package com.github.ad.index.adplan;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AdPlanObj {
 
     private Long planId;
@@ -33,6 +35,5 @@ public class AdPlanObj {
         if (adPlanObj.getEndDate() != null) {
             this.endDate = adPlanObj.getEndDate();
         }
-
     }
 }
