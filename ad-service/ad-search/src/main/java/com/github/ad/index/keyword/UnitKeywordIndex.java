@@ -43,6 +43,7 @@ public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
     }
 
     @Override
+    @SuppressWarnings("all")
     public void add(String key, Set<Long> value) {
         // 更新 keyword_unit_map
         log.info("UnitKeywordIndex,before add : {}", unit_keyword_map);
@@ -75,6 +76,7 @@ public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
     }
 
     @Override
+    @SuppressWarnings("all")
     public void delete(String key, Set<Long> value) {
         log.info("UnitKeywordIndex,before delete : {}", unit_keyword_map);
         Set<Long> unitIds = keyword_unit_map.get(key);
@@ -88,7 +90,7 @@ public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
                 keywordSet.remove(key);
             }
         }
-        log.info("UnitKeywordIndex,before delete : {}", unit_keyword_map);
+        log.info("UnitKeywordIndex,after delete : {}", unit_keyword_map);
     }
 
     /**
