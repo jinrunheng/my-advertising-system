@@ -5,8 +5,8 @@
 - [第三章 Eureka 与 Zuul 介绍](https://www.yuque.com/dobbykim/dtgo95/if11z5)
 - [第四章 微服务通用模块开发](https://www.yuque.com/dobbykim/dtgo95/gdg3kn)
 - [第五章 广告投放系统的开发](https://www.yuque.com/dobbykim/dtgo95/gqs0yo)
-- [第六章 广告检索系统-微服务调用]()
-
+- [第六章 广告检索系统-微服务调用](https://www.yuque.com/dobbykim/dtgo95/ziua6a)
+- [第七章 广告检索系统-广告数据库索引的设计与实现](https://www.yuque.com/dobbykim/dtgo95/bzo8cd)
 使用 Docker 开启 MySQL 数据库:
 ```bash
 docker run --name ad -e MYSQL_ROOT_PASSWORD=123 -e MYSQL_DATABASE=ad -p 3306:3306 -v /Users/macbook/Desktop/myProject/my-advertising-system/db:/data -d mysql
