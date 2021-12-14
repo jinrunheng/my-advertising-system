@@ -1,6 +1,7 @@
 package com.github.ad.index.keyword;
 
 import com.github.ad.index.IndexAware;
+import com.github.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -45,18 +46,24 @@ public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
     public void add(String key, Set<Long> value) {
         // 更新 keyword_unit_map
         log.info("UnitKeywordIndex,before add : {}", unit_keyword_map);
-        Set<Long> unitIds = keyword_unit_map.get(key);
-        if (unitIds == null) {
-            unitIds = new ConcurrentSkipListSet<>();
-        }
+//        Set<Long> unitIds = keyword_unit_map.get(key);
+//        if (unitIds == null) {
+//            unitIds = new ConcurrentSkipListSet<>();
+//        }
+        Set<Long> unitIds = CommonUtils.getOrCreate(
+                key, keyword_unit_map, ConcurrentSkipListSet::new
+        );
         unitIds.addAll(value);
 
         // 更新 unit_keyword_map
         for (Long unitId : value) {
-            Set<String> keywordSet = unit_keyword_map.get(unitId);
-            if (keywordSet == null) {
-                keywordSet = new ConcurrentSkipListSet<>();
-            }
+//            Set<String> keywordSet = unit_keyword_map.get(unitId);
+//            if (keywordSet == null) {
+//                keywordSet = new ConcurrentSkipListSet<>();
+//            }
+            Set<String> keywordSet = CommonUtils.getOrCreate(
+                    unitId, unit_keyword_map, ConcurrentSkipListSet::new
+            );
             keywordSet.add(key);
         }
         log.info("UnitKeywordIndex,after add : {}", unit_keyword_map);
